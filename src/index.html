@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Webpack Template</title>
+  </head>
+  <body id="body">
+    <div id="app">
+      <div>
+        <v-page inline-template>
+          <div>
+            <header class="header">
+              <div class="header__container">
+                <picture>
+                  <source srcset="./assets/img/logo-desktop.png" media="(min-width: 768px)">
+                  <img src="./assets/img/logo.png" alt="Logo of StarWars." class="header__logo">
+                </picture>
+              </div>
+            </header>
+            <main class="main">
+              <transition name="fadeout">
+                <div class="video" v-show="!this.isLoaded || !this.isMinDelayLeft">
+                  <video src="./assets/img/preload.mp4" autoplay loop muted></video>
+                </div>
+              </transition>
+              <transition name="fadein">
+                <div class="content" v-show="this.isLoaded && this.isCanRenderList">
+                  <search></search>
+                  <section class="characters">
+                    <div class="characters__container">
+                      <ul class="characters__list">
+                        <li v-for="item in this.dataList" class="characters__item">
+                          <card :characterInfo="item"></card>
+                        </li>
+                      </ul>
+                    </div>
+                  </section>
+                  <button class="button-up" v-show="!this.isPopupOpen"  @click="toTop"></button>
+                </div>
+              </transition>
+              <div class="video" v-show="this.isUpdating">
+                <video src="./assets/img/preload.mp4" autoplay loop muted></video>
+              </div>
+            </main>
+            <footer class="footer">
+              <div class="footer__container">
+                <p class="footer__text">STAR WARS CHARACTER<br class="desktop-hidden" /> Encyclopedia, 2019</p>
+              </div>
+            </footer>
+          </div>
+        </v-page>
+      </div>
+    </div>
+  </body>
+</html>
